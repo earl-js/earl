@@ -146,6 +146,27 @@ describe('smartEq', () => {
     expect(smartEq(-0, +0)).to.be.deep.eq({ result: 'error', reason: 'value mismatch' })
   })
 
+  it('compares recursive objects', () => {
+    interface Node {
+      prev?: Node,
+      next?: Node,
+      value: any
+    }
+    const node = (value: any): Node => ({ value })
+    const list = (...values: any[]) => values.map(node).map((node, index, nodes) => {
+      node.prev = nodes[index - 1]
+      node.next = nodes[index + 1]
+      return node
+    })[0]
+
+    const a = list(1, 2, 3)
+    const b = list(1, 2, 3)
+    const c = list(4, 5)
+
+    expect(smartEq(a, b)).to.be.deep.eq({ result: 'success' })
+    expect(smartEq(a, c)).to.be.deep.eq({ result: 'error', reason: 'value mismatch' })
+  })
+
   describe('non-strict', () => {
     it('doesnt compare prototypes', () => {
       class Test {
