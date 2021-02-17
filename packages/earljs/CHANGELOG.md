@@ -1,5 +1,11 @@
 # earljs
 
+## 0.1.11
+
+### Patch Changes
+
+- d69576f: Fix types for mockFn's default implementation
+
 ## 0.1.10
 
 ### Patch Changes
