@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist",
     "build": "yarn clean && tsc -p ./tsconfig.json",
-    "test:fix": "yarn lint:fix && yarn format:fix && yarn test && yarn typecheck"
+    "test:fix": "yarn lint:fix && yarn format:fix && yarn typecheck"
   },
   "devDependencies": {
     "earljs": "*"
